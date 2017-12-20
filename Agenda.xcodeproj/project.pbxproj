@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		03AA174E1FC84154003CB2B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA174D1FC84154003CB2B8 /* AppDelegate.swift */; };
-		03AA17501FC84154003CB2B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA174F1FC84154003CB2B8 /* ViewController.swift */; };
 		03AA17531FC84154003CB2B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03AA17511FC84154003CB2B8 /* Main.storyboard */; };
 		03AA17561FC84154003CB2B8 /* Agenda.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03AA17541FC84154003CB2B8 /* Agenda.xcdatamodeld */; };
 		03AA17581FC84154003CB2B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03AA17571FC84154003CB2B8 /* Assets.xcassets */; };
 		03AA175B1FC84154003CB2B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03AA17591FC84154003CB2B8 /* LaunchScreen.storyboard */; };
+		03AA17661FC84353003CB2B8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA17651FC84353003CB2B8 /* HomeTableViewController.swift */; };
+		03AA17681FC843B1003CB2B8 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA17671FC843B1003CB2B8 /* HomeTableViewCell.swift */; };
+		03AA176D1FC8515A003CB2B8 /* AlunoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03AA174A1FC84154003CB2B8 /* Agenda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agenda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03AA174D1FC84154003CB2B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		03AA174F1FC84154003CB2B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03AA17521FC84154003CB2B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03AA17551FC84154003CB2B8 /* Agenda.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agenda.xcdatamodel; sourceTree = "<group>"; };
 		03AA17571FC84154003CB2B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03AA175A1FC84154003CB2B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03AA175C1FC84154003CB2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03AA17651FC84353003CB2B8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		03AA17671FC843B1003CB2B8 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				03AA174D1FC84154003CB2B8 /* AppDelegate.swift */,
-				03AA174F1FC84154003CB2B8 /* ViewController.swift */,
+				03AA17621FC8433E003CB2B8 /* Home */,
+				03AA17691FC84A2D003CB2B8 /* Alunos */,
 				03AA17511FC84154003CB2B8 /* Main.storyboard */,
 				03AA17571FC84154003CB2B8 /* Assets.xcassets */,
 				03AA17591FC84154003CB2B8 /* LaunchScreen.storyboard */,
@@ -65,6 +70,55 @@
 				03AA17541FC84154003CB2B8 /* Agenda.xcdatamodeld */,
 			);
 			path = Agenda;
+			sourceTree = "<group>";
+		};
+		03AA17621FC8433E003CB2B8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				03AA17641FC8433E003CB2B8 /* View */,
+				03AA17631FC8433E003CB2B8 /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		03AA17631FC8433E003CB2B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				03AA17651FC84353003CB2B8 /* HomeTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		03AA17641FC8433E003CB2B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03AA17671FC843B1003CB2B8 /* HomeTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		03AA17691FC84A2D003CB2B8 /* Alunos */ = {
+			isa = PBXGroup;
+			children = (
+				03AA176B1FC84A2D003CB2B8 /* View */,
+				03AA176A1FC84A2D003CB2B8 /* Controller */,
+			);
+			path = Alunos;
+			sourceTree = "<group>";
+		};
+		03AA176A1FC84A2D003CB2B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		03AA176B1FC84A2D003CB2B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +193,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AA176D1FC8515A003CB2B8 /* AlunoViewController.swift in Sources */,
+				03AA17661FC84353003CB2B8 /* HomeTableViewController.swift in Sources */,
 				03AA17561FC84154003CB2B8 /* Agenda.xcdatamodeld in Sources */,
-				03AA17501FC84154003CB2B8 /* ViewController.swift in Sources */,
+				03AA17681FC843B1003CB2B8 /* HomeTableViewCell.swift in Sources */,
 				03AA174E1FC84154003CB2B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF4G5DZZMF;
 				INFOPLIST_FILE = Agenda/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = apps.Agenda;
@@ -293,6 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF4G5DZZMF;
 				INFOPLIST_FILE = Agenda/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = apps.Agenda;
