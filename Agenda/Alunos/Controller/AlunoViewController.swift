@@ -49,8 +49,14 @@ class AlunoViewController: UIViewController {
     
     // MARK: - IBActions
     
+    // botão para selecionar foto do contato da agenda
     @IBAction func buttonFoto(_ sender: UIButton) {
-        // TO DO
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let multimidia = UIImagePickerController()
+            multimidia.sourceType = .camera
+            self.present(multimidia, animated: true, completion: nil)
+        }
     }
     
     @IBAction func stepperNota(_ sender: UIStepper) {
