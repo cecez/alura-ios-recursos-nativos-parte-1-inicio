@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlunoViewController: UIViewController {
+class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
     
     // MARK: - IBOutlets
     
@@ -23,11 +23,16 @@ class AlunoViewController: UIViewController {
     @IBOutlet weak var textFieldSite: UITextField!
     @IBOutlet weak var textFieldNota: UITextField!
     
+    // MARK: - Atributos
+    
+    let imagePicker = ImagePicker()
+    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.arredondaView()
+        self.setup()
         NotificationCenter.default.addObserver(self, selector: #selector(aumentarScrollView(_:)), name: .UIKeyboardWillShow, object: nil)
     }
     
@@ -36,6 +41,10 @@ class AlunoViewController: UIViewController {
     }
     
     // MARK: - Métodos
+    
+    func setup() {
+        imagePicker.delegate = self
+    }
     
     func arredondaView() {
         self.viewImagemAluno.layer.cornerRadius = self.viewImagemAluno.frame.width / 2
@@ -47,14 +56,22 @@ class AlunoViewController: UIViewController {
         self.scrollViewPrincipal.contentSize = CGSize(width: self.scrollViewPrincipal.frame.width, height: self.scrollViewPrincipal.frame.height + self.scrollViewPrincipal.frame.height/2)
     }
     
+    // MARK: - Delegate
+    
+    func imagePickerFotoSelecionada(_ foto: UIImage) {
+        imageAluno.image = foto
+    }
+    
     // MARK: - IBActions
     
     // botão para selecionar foto do contato da agenda
     @IBAction func buttonFoto(_ sender: UIButton) {
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let multimidia = UIImagePickerController()
-            multimidia.sourceType = .camera
+            let multimidia          = UIImagePickerController()
+            multimidia.sourceType   = .camera
+            multimidia.delegate     = imagePicker
+            
             self.present(multimidia, animated: true, completion: nil)
         }
     }
