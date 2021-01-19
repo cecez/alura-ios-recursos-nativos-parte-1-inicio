@@ -56,6 +56,23 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
         self.scrollViewPrincipal.contentSize = CGSize(width: self.scrollViewPrincipal.frame.width, height: self.scrollViewPrincipal.frame.height + self.scrollViewPrincipal.frame.height/2)
     }
     
+    func mostrarMultimidia(_ opcao: MenuOpcoes)
+    {
+        // cria multimídia
+        let multimidia          = UIImagePickerController()
+        multimidia.delegate     = imagePicker
+        
+        // define tipo de multimídia para exibir
+        if opcao == .camera && UIImagePickerController.isSourceTypeAvailable(.camera) {
+            multimidia.sourceType = .camera
+        } else {
+            multimidia.sourceType = .photoLibrary
+        }
+        
+        // apresenta multimídia
+        self.present(multimidia, animated: true, completion: nil)
+    }
+    
     // MARK: - Delegate
     
     func imagePickerFotoSelecionada(_ foto: UIImage) {
@@ -67,13 +84,11 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
     // botão para selecionar foto do contato da agenda
     @IBAction func buttonFoto(_ sender: UIButton) {
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let multimidia          = UIImagePickerController()
-            multimidia.sourceType   = .camera
-            multimidia.delegate     = imagePicker
-            
-            self.present(multimidia, animated: true, completion: nil)
+        // cria e apresenta menu
+        let menu = ImagePicker().menuDeOpcoes { (opcao) in
+            self.mostrarMultimidia(opcao)
         }
+        present(menu, animated: true, completion: nil)
     }
     
     @IBAction func stepperNota(_ sender: UIStepper) {
