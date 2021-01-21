@@ -25,6 +25,7 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
     @IBOutlet weak var textFieldNota: UITextField!
     
     // MARK: - Atributos
+    
     var contexto:NSManagedObjectContext {
         let appDelegate =   UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
