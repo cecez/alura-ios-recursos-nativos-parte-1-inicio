@@ -32,9 +32,15 @@ class HomeTableViewCell: UITableViewCell {
         imageAluno.layer.cornerRadius   = imageAluno.frame.width / 2
         imageAluno.layer.masksToBounds  = true
         
-        if let imagemDoAluno = aluno.foto as? UIImage {
-            imageAluno.image = imagemDoAluno
+        let gerenciadorDeArquivos   = FileManager.default
+        let caminho                 = NSHomeDirectory() as NSString
+        let caminhoDaImagem         = caminho.appendingPathComponent(aluno.foto!)
+        
+        if gerenciadorDeArquivos.fileExists(atPath: caminhoDaImagem) {
+            imageAluno.image = UIImage(contentsOfFile: caminhoDaImagem)
         }
+        
+    
     }
     
 }

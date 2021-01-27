@@ -58,8 +58,14 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
         textFieldTelefone.text      = alunoSelecionado.telefone
         textFieldSite.text          = alunoSelecionado.site
         textFieldNota.text          = "\(alunoSelecionado.nota)"
-        imageAluno.image            = alunoSelecionado.foto as? UIImage
         
+        let gerenciadorDeArquivos   = FileManager.default
+        let caminho                 = NSHomeDirectory() as NSString
+        let caminhoDaImagem         = caminho.appendingPathComponent(alunoSelecionado.foto!)
+        
+        if gerenciadorDeArquivos.fileExists(atPath: caminhoDaImagem) {
+            imageAluno.image = UIImage(contentsOfFile: caminhoDaImagem)
+        }
     }
     
     func arredondaView() {
@@ -118,12 +124,43 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
             aluno = Aluno(context: contexto)
         }
         
+        // cria caminho do diretório para salvar imagem
+        let caminhoDoSistemaDeArquivos  = NSHomeDirectory() as NSString
+        let diretorioDeImagens          = "Documents/Images"
+        let caminhoCompleto             = caminhoDoSistemaDeArquivos.appendingPathComponent(diretorioDeImagens)
+        
+        // verifica, e se necessário cria, diretório de imagens
+        let gerenciadorDeArquivos = FileManager.default
+        if !gerenciadorDeArquivos.fileExists(atPath: caminhoCompleto) {
+            do {
+                try gerenciadorDeArquivos.createDirectory(atPath: caminhoCompleto, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        // cria nome da imagem
+        let nomeDaImagem    = String(format: "%@.jpeg", aluno!.objectID.uriRepresentation().lastPathComponent)
+        let url             = URL(fileURLWithPath: String(format: "%@/%@", caminhoCompleto, nomeDaImagem))
+        
+        // transforma de UIImage para Data e a salva
+        guard let imagem = imageAluno.image else { return }
+        guard let data = UIImagePNGRepresentation(imagem) else { return }
+        
+        do {
+            try data.write(to: url)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
+        
         aluno?.nome      = textFieldNome.text
         aluno?.endereco  = textFieldEndereco.text
         aluno?.telefone  = textFieldTelefone.text
         aluno?.site      = textFieldSite.text
         aluno?.nota      = (textFieldNota.text! as NSString).doubleValue
-        aluno?.foto      = imageAluno.image
+        aluno?.foto      = String(format: "%@/%@", diretorioDeImagens, nomeDaImagem)
         
         do {
             try contexto.save()
