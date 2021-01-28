@@ -16,6 +16,7 @@
 		03AA17681FC843B1003CB2B8 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA17671FC843B1003CB2B8 /* HomeTableViewCell.swift */; };
 		03AA176D1FC8515A003CB2B8 /* AlunoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */; };
 		2618BF0B25AF9AEE0018F3B2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2618BF0A25AF9AEE0018F3B2 /* ImagePicker.swift */; };
+		266B473725C3684C00104518 /* MenuOpcoesAlunos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B473625C3684C00104518 /* MenuOpcoesAlunos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		03AA17671FC843B1003CB2B8 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoViewController.swift; sourceTree = "<group>"; };
 		2618BF0A25AF9AEE0018F3B2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		266B473625C3684C00104518 /* MenuOpcoesAlunos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOpcoesAlunos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				2618BF0A25AF9AEE0018F3B2 /* ImagePicker.swift */,
+				266B473625C3684C00104518 /* MenuOpcoesAlunos.swift */,
 			);
 			path = Componentes;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				03AA17561FC84154003CB2B8 /* Agenda.xcdatamodeld in Sources */,
 				2618BF0B25AF9AEE0018F3B2 /* ImagePicker.swift in Sources */,
 				03AA17681FC843B1003CB2B8 /* HomeTableViewCell.swift in Sources */,
+				266B473725C3684C00104518 /* MenuOpcoesAlunos.swift in Sources */,
 				03AA174E1FC84154003CB2B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
