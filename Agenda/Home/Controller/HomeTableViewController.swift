@@ -13,12 +13,13 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
     
     //MARK: - Variáveis
     
-    var contexto:NSManagedObjectContext {
-        let appDelegate =   UIApplication.shared.delegate as! AppDelegate
+    var contexto: NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    var gerenciadorDeResultados:NSFetchedResultsController<Aluno>?
-    var alunoViewController:AlunoViewController?
+    var gerenciadorDeResultados:    NSFetchedResultsController<Aluno>?
+    var alunoViewController:        AlunoViewController?
+    var mensagem:                   Mensagem
     
     // MARK: - Constantes
     
@@ -78,10 +79,16 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
     @objc func abrirActionSheet(_ longPress: UILongPressGestureRecognizer) {
         // estado inicial do pressionamento
         if longPress.state == .began {
+            
+            guard let alunoSelecionado = gerenciadorDeResultados?.fetchedObjects?[(longPress.view?.tag)!] else { return }
+            
             let menu = MenuOpcoesAlunos().configuraMenuDeOpcoesDoAluno { (opcao) in
                 switch opcao {
                 case .sms:
-                    print("SMS")
+                    if let componenteMensagem = self.mensagem.configuraSMS(alunoSelecionado) {
+                        componenteMensagem.messageComposeDelegate = self.mensagem
+                        self.present(componenteMensagem, animated: true, completion: nil)
+                    }
                 }
             }
             self.present(menu, animated: true, completion: nil)
