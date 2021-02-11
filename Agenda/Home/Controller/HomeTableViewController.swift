@@ -17,9 +17,10 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    var gerenciadorDeResultados:    NSFetchedResultsController<Aluno>?
-    var alunoViewController:        AlunoViewController?
-    var mensagem:                   Mensagem
+    var gerenciadorDeResultados: NSFetchedResultsController<Aluno>?
+    var alunoViewController: AlunoViewController?
+    
+    var mensagem = Mensagem()
     
     // MARK: - Constantes
     
@@ -89,6 +90,17 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
                         componenteMensagem.messageComposeDelegate = self.mensagem
                         self.present(componenteMensagem, animated: true, completion: nil)
                     }
+                    break
+                case .ligacao:
+                    // desempacota seguramente número do aluno
+                    guard let numeroDoAluno = alunoSelecionado.telefone else { return }
+                    
+                    // testa se é possível e abre URL criada para ligação
+                    if let url = URL(string: "tel://\(numeroDoAluno)"), UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                    
+                    break
                 }
             }
             self.present(menu, animated: true, completion: nil)
