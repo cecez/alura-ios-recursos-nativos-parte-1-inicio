@@ -99,7 +99,21 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
                     if let url = URL(string: "tel://\(numeroDoAluno)"), UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
-                    
+                    break
+                case .waze:
+                
+                    // verifica se usuário tem Waze instalado
+                    if (UIApplication.shared.canOpenURL(URL(string: "waze://")!)) {
+                        guard let enderecoDoAluno = alunoSelecionado.endereco else { return }
+                        Localizacao().converteEnderecoEmCoordenadas(endereco: enderecoDoAluno) { (localizacaoEncontrada) in
+                            let latitude    = String(describing: localizacaoEncontrada.location!.coordinate.latitude)
+                            let longitude   = String(describing: localizacaoEncontrada.location!.coordinate.longitude)
+                            let url: String = "waze://?ll=\(latitude),\(longitude)&navigate=yes"
+                            
+                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+                        }
+                    }
+                
                     break
                 }
             }
