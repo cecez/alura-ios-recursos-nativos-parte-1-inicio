@@ -268,6 +268,9 @@
                             <constraint firstItem="CLg-QN-iAS" firstAttribute="top" secondItem="k2f-bh-xic" secondAttribute="top" constant="20" id="meO-YM-MTI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapa" destination="CLg-QN-iAS" id="vJ1-fB-YnF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S6v-Yy-qIu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
