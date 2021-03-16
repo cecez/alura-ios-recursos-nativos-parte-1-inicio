@@ -21,9 +21,10 @@ class MapaViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        localizacaoInicial()
-
         self.navigationItem.title = getTitulo()
+        localizacaoInicial()
+        localizacaoAluno()
+        
     }
     
     func getTitulo() -> String {
@@ -33,9 +34,9 @@ class MapaViewController: UIViewController {
     // cria pino da localização do aluno
     func localizacaoAluno() {
         if let aluno = aluno {
-            Localizacao().converteEnderecoEmCoordenadas(endereco: aluno.endereco!) { (localizacaoEncontrada) in
+              Localizacao().converteEnderecoEmCoordenadas(endereco: aluno.endereco!) { (localizacaoEncontrada) in
                 let pino = self.configuraPino(titulo: aluno.nome!, localizacao: localizacaoEncontrada)
-                
+
                 self.mapa.addAnnotation(pino)
             }
         }
