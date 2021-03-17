@@ -144,12 +144,15 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell        = tableView.dequeueReusableCell(withIdentifier: "celula-aluno", for: indexPath) as! HomeTableViewCell
-        let longPress   = UILongPressGestureRecognizer(target: self, action: #selector(abrirActionSheet(_:)))
-        guard let aluno = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return cell }
+        let cell            = tableView.dequeueReusableCell(withIdentifier: "celula-aluno", for: indexPath) as! HomeTableViewCell
+        let longPress       = UILongPressGestureRecognizer(target: self, action: #selector(abrirActionSheet(_:)))
+        
+        guard let aluno     = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return cell }
         
         cell.configuraCelula(aluno)
         cell.addGestureRecognizer(longPress)
+        
+        longPress.view?.tag = indexPath.row
         
         return cell
     }
