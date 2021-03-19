@@ -182,5 +182,10 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
         guard let alunoSelecionado = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
         alunoViewController?.aluno = alunoSelecionado
     }
+    
+    @IBAction func buttonCalculaMedia(_ sender: UIBarButtonItem) {
+        CalculaMediaAPI().calculaMediaGeralDosAlunos()
+    }
+    
 
 }
