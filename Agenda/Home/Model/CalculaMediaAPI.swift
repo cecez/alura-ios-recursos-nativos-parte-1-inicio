@@ -10,22 +10,38 @@ import UIKit
 
 class CalculaMediaAPI: NSObject {
     
-    func calculaMediaGeralDosAlunos() {
+    func calculaMediaGeralDosAlunos(
+        alunos:     Array<Aluno>,
+        sucesso:    @escaping(_ dicionarioDeMedias: Dictionary<String, Any>) -> Void,
+        falha:      @escaping(_ error: Error) -> Void
+    ) {
         
-        guard let url                                       = URL(string: "https://www.caelum.com.br/mobile") else { return }
+//        guard let url                                       = URL(string: "https://www.caelum.com.br/mobile") else { return }
+        guard let url                                       = URL(string: "https://www.cecez.com.br/ios/api.php") else { return }
         var listaDeAlunos: Array<Dictionary<String, Any>>   = []
         var json: Dictionary<String, Any>                   = [:]
-        var dicionarioAlunos                                =
-        [
-            "id":       "1",
-            "nome":     "Nome 1",
-            "endereco": "Endereco 1",
-            "telefone": "111111",
-            "site":     "www.um.com",
-            "nota":     "1",
-        ]
         
-        listaDeAlunos.append(dicionarioAlunos as [String: Any])
+        
+        for aluno in alunos {
+            
+            guard let nome      = aluno.nome else { break }
+            guard let endereco  = aluno.endereco else { break }
+            guard let telefone  = aluno.telefone else { break }
+            guard let site      = aluno.site else { break }
+            
+            let dicionarioAlunos                                =
+            [
+                "id":       "\(aluno.objectID)",
+                "nome":     nome,
+                "endereco": endereco,
+                "telefone": telefone,
+                "site":     site,
+                "nota":     String(aluno.nota),
+            ]
+            
+            listaDeAlunos.append(dicionarioAlunos as [String: Any])
+            
+        }
         
         json = [
             "list": [
@@ -44,11 +60,10 @@ class CalculaMediaAPI: NSObject {
             let task = URLSession.shared.dataTask(with: requisicao) { (data, response, error) in
                 if error == nil {
                     do {
-                        let dicionario = try JSONSerialization.jsonObject(with: data!, options: [])
-                        print(dicionario)
+                        let dicionario = try JSONSerialization.jsonObject(with: data!, options: []) as! Dictionary<String, Any>
+                        sucesso(dicionario)
                     } catch {
-                        print("erro 1")
-                        print(error.localizedDescription)
+                        falha(error)
                     }
                     
                 }
