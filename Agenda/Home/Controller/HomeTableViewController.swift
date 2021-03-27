@@ -185,13 +185,140 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
     
     @IBAction func buttonCalculaMedia(_ sender: UIBarButtonItem) {
         
-        guard let listaDeAlunos = gerenciadorDeResultados?.fetchedObjects else { return }
+        guard let listaDeAlunos2 = gerenciadorDeResultados?.fetchedObjects else { return }
         
-        CalculaMediaAPI().calculaMediaGeralDosAlunos(
-            alunos: listaDeAlunos,
-            sucesso: { (dicionario) in print(dicionario) },
-            falha: { (error) in print(error.localizedDescription)}
-        )
+        
+        
+        guard let url                                       = URL(string: "https://www.cecez.com.br/ios/api.php") else { return }
+        var listaDeAlunos: Array<Dictionary<String, Any>>   = []
+        var json: Dictionary<String, Any>                   = [:]
+        
+        
+        for aluno in listaDeAlunos2 {
+            
+            guard let nome      = aluno.nome else { break }
+            guard let endereco  = aluno.endereco else { break }
+            guard let telefone  = aluno.telefone else { break }
+            guard let site      = aluno.site else { break }
+            
+            let dicionarioAlunos                                =
+            [
+                "id":       "\(aluno.objectID)",
+                "nome":     nome,
+                "endereco": endereco,
+                "telefone": telefone,
+                "site":     site,
+                "nota":     String(aluno.nota),
+            ]
+            
+            listaDeAlunos.append(dicionarioAlunos as [String: Any])
+            
+        }
+        
+        json = [
+            "list": [
+                [ "aluno": listaDeAlunos ]
+            ]
+        ]
+        
+        do {
+            var requisicao          = URLRequest(url: url)
+            let data                = try JSONSerialization.data(withJSONObject: json, options: [])
+            requisicao.httpBody     = data
+            requisicao.httpMethod   = "POST"
+            
+            requisicao.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = URLSession.shared.dataTask(with: requisicao) { (data, response, error) in
+                if error == nil {
+                    do {
+                        let dicionario = try JSONSerialization.jsonObject(with: data!, options: []) as! Dictionary<String, Any>
+                        print("ok")
+                        
+                        
+                        if let variavel = dicionario["media"] {
+                        
+                            let variavel2 = String(describing: variavel)
+    
+                            print("o valor é de \(variavel2)")
+                            print ( type(of: variavel2) )
+                            
+                            DispatchQueue.main.async {
+                              
+                                let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é \(variavel2)", preferredStyle: .alert)
+                                let botao   = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+                                alerta.addAction(botao)
+        
+                                self.present(alerta, animated: true, completion: nil)
+                                
+                            }
+    
+                            
+    
+    
+                        }
+                        
+                        
+                    } catch {
+                        print("erro 1")
+                    }
+                    
+                }
+            }
+            task.resume()
+            
+        } catch {
+            print("erro 2")
+            print(error.localizedDescription)
+        }
+        
+        
+        
+        
+        
+//        let constante = CalculaMediaAPI().calculaMediaGeralDosAlunos2(alunos: listaDeAlunos)
+//
+//        print(constante)
+//
+//
+//        let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é 11", preferredStyle: .alert)
+//        let botao   = UIAlertAction(title: "OK", style: .default, handler: nil)
+//
+//        alerta.addAction(botao)
+//
+//        present(alerta, animated: true, completion: nil)
+        
+        
+        
+//        CalculaMediaAPI().calculaMediaGeralDosAlunos(
+//            alunos: listaDeAlunos,
+//            sucesso:
+//                { (dicionario) in
+//
+//                    if let variavel = dicionario["media"] {
+//
+//                        let variavel2 = String(describing: variavel)
+//
+//                        print("o valor é de \(variavel2)")
+//                        print ( type(of: variavel2) )
+//
+//                        let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é \(variavel2)", preferredStyle: .alert)
+//                        let botao   = UIAlertAction(title: "OK", style: .default, handler: nil)
+//
+//                        alerta.addAction(botao)
+//
+//                        self.present(alerta, animated: true, completion: nil)
+//
+//
+//                    }
+//
+//
+//                   if let alerta = Notificacoes().exibeNotificacaoDeMediaDosAlunos(dicionarioDeMedia: dicionario)
+//                    { self.present(alerta, animated: false, completion: nil) }
+//                },
+//            falha: { (error) in print(error.localizedDescription)}
+//        )
 
     }
     
