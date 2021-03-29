@@ -12,13 +12,9 @@ class Notificacoes: NSObject {
     
     func exibeNotificacaoDeMediaDosAlunos(dicionarioDeMedia: Dictionary<String, Any>) -> UIAlertController? {
         
-        
         if let mediaRaw = dicionarioDeMedia["media"] {
-            print("entrou sim")
-//            let media   = String(describing: mediaRaw)
-            //let media   = "123"
-            //let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é \(media)", preferredStyle: .alert)
-            let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é 11", preferredStyle: .alert)
+            let media   = String(describing: mediaRaw)
+            let alerta  = UIAlertController(title: "Atenção", message: "a média geral dos alunos é \(media)", preferredStyle: .alert)
             let botao   = UIAlertAction(title: "OK", style: .default, handler: nil)
             
             alerta.addAction(botao)
