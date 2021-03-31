@@ -6,6 +6,8 @@
 //  Copyright © 2021 Alura. All rights reserved.
 //
 
+/* teste */
+
 import UIKit
 
 class CalculaMediaAPI: NSObject {
