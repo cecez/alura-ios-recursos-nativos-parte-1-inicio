@@ -37,10 +37,18 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
     
     // MARK: - Métodos
     
-    func recuperaAluno() {
+    func filtraAluno(_ filtro: String) -> NSPredicate {
+        return NSPredicate(format: "nome CONTAINS %@", filtro)
+    }
+    
+    func recuperaAluno(filtro: String = "") {
         let pesquisaAluno:NSFetchRequest = Aluno.fetchRequest()
         let ordenaPorNome = NSSortDescriptor(key: "nome", ascending: true)
         pesquisaAluno.sortDescriptors = [ordenaPorNome]
+        
+        if (verificaFiltro(filtro: filtro)) {
+            pesquisaAluno.predicate = filtraAluno(filtro)
+        }
         
         gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaAluno, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
         gerenciadorDeResultados?.delegate = self
@@ -62,6 +70,14 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
         if segue.identifier == "editar" {
             alunoViewController = segue.destination as? AlunoViewController
         }
+    }
+    
+    func verificaFiltro(filtro: String) -> Bool {
+        if (filtro.isEmpty) {
+            return false
+        }
+        
+        return true
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -220,6 +236,23 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
         
         
 
+    }
+    
+    
+    
+    
+    // MARK: UISearchBarDelegate
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let nomeDoAlunoPesquisado = searchBar.text else { return }
+        
+        recuperaAluno(filtro: nomeDoAlunoPesquisado)
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        recuperaAluno()
+        tableView.reloadData()
     }
     
 
