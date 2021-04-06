@@ -18,6 +18,7 @@
 		2617DA5B26151F9500925ADD /* AutenticacaoLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617DA5A26151F9500925ADD /* AutenticacaoLocal.swift */; };
 		2618BF0B25AF9AEE0018F3B2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2618BF0A25AF9AEE0018F3B2 /* ImagePicker.swift */; };
 		262E79F92604035D00076C59 /* CalculaMediaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262E79F82604035D00076C59 /* CalculaMediaAPI.swift */; };
+		26338846261BB7B7003A4FD8 /* Pino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26338845261BB7B6003A4FD8 /* Pino.swift */; };
 		266B473725C3684C00104518 /* MenuOpcoesAlunos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B473625C3684C00104518 /* MenuOpcoesAlunos.swift */; };
 		269043C225D33D3B00999281 /* Mensagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269043C125D33D3B00999281 /* Mensagem.swift */; };
 		26F7A98425F822A700FD03D2 /* Localizacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7A98325F822A700FD03D2 /* Localizacao.swift */; };
@@ -39,6 +40,7 @@
 		2617DA5A26151F9500925ADD /* AutenticacaoLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutenticacaoLocal.swift; sourceTree = "<group>"; };
 		2618BF0A25AF9AEE0018F3B2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		262E79F82604035D00076C59 /* CalculaMediaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculaMediaAPI.swift; sourceTree = "<group>"; };
+		26338845261BB7B6003A4FD8 /* Pino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pino.swift; sourceTree = "<group>"; };
 		266B473625C3684C00104518 /* MenuOpcoesAlunos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOpcoesAlunos.swift; sourceTree = "<group>"; };
 		269043C125D33D3B00999281 /* Mensagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mensagem.swift; sourceTree = "<group>"; };
 		26F7A98325F822A700FD03D2 /* Localizacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizacao.swift; sourceTree = "<group>"; };
@@ -161,9 +163,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		26338844261BB7AA003A4FD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26338845261BB7B6003A4FD8 /* Pino.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		26F7A98625FAC7F800FD03D2 /* Mapa */ = {
 			isa = PBXGroup;
 			children = (
+				26338844261BB7AA003A4FD8 /* Model */,
 				26F7A98725FAC7FE00FD03D2 /* Controller */,
 			);
 			path = Mapa;
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03AA176D1FC8515A003CB2B8 /* AlunoViewController.swift in Sources */,
+				26338846261BB7B7003A4FD8 /* Pino.swift in Sources */,
 				03AA17661FC84353003CB2B8 /* HomeTableViewController.swift in Sources */,
 				03AA17561FC84154003CB2B8 /* Agenda.xcdatamodeld in Sources */,
 				2618BF0B25AF9AEE0018F3B2 /* ImagePicker.swift in Sources */,
