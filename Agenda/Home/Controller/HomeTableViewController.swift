@@ -240,6 +240,17 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
     
     
     
+    @IBAction func buttonLocalizacaoGeral(_ sender: UIBarButtonItem) {
+        if #available(iOS 13.0, *) {
+            let mapa = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "mapa") as! MapaViewController
+        
+            navigationController?.pushViewController(mapa, animated: true)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    
     
     // MARK: UISearchBarDelegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

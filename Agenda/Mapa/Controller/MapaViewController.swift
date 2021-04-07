@@ -9,29 +9,54 @@
 import UIKit
 import MapKit
 
-class MapaViewController: UIViewController {
+class MapaViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - IBOutlet
     @IBOutlet weak var mapa: MKMapView!
     
     // MARK: - Variável
     var aluno: Aluno?
-    lazy var localizacao = Localizacao()
+    lazy var localizacao                = Localizacao()
+    lazy var gerenciadorDeLocalizacao   = CLLocationManager()
     
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = getTitulo()
+        self.navigationItem.title = "Localizar aluno"
+        
+        mapa.delegate                       = localizacao
+        gerenciadorDeLocalizacao.delegate   = self
+        
         localizacaoInicial()
         localizacaoAluno()
-        mapa.delegate = localizacao
-        
+        verificaAutorizacaoDeLocalizacaoDoUsuario()
     }
     
-    func getTitulo() -> String {
-        return "Localizar aluno"
+    // MARK: - Métodos
+    
+    func verificaAutorizacaoDeLocalizacaoDoUsuario() {
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                case .authorizedWhenInUse:
+                    let botao = Localizacao().configuraBotaoLocalizacaoAtual(mapa: mapa)
+                    mapa.addSubview(botao)
+                    gerenciadorDeLocalizacao.startUpdatingLocation()
+                    break
+                    
+                case .notDetermined: // primeira vez ao utilizar recurso
+                    gerenciadorDeLocalizacao.requestWhenInUseAuthorization()
+                    break
+                    
+                case .denied:
+                    break
+                    
+                default:
+                    break
+            }
+        }
     }
+    
     
     // cria pino da localização do aluno
     func localizacaoAluno() {
@@ -55,6 +80,19 @@ class MapaViewController: UIViewController {
             self.mapa.addAnnotation(pino)
         }
         
+    }
+    
+    // MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+            case .authorizedWhenInUse:
+                let botao = Localizacao().configuraBotaoLocalizacaoAtual(mapa: mapa)
+                mapa.addSubview(botao)
+                gerenciadorDeLocalizacao.startUpdatingLocation()
+                
+            default:
+                break
+        }
     }
 
 
