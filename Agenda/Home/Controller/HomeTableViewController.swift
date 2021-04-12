@@ -141,7 +141,23 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFet
                         // Fallback on earlier versions
                     }
                     
+                    break
+                case .abrirPaginaWeb:
+                
+                if let urlDoAluno = alunoSelecionado.site {
                     
+                    var urlFormatada = urlDoAluno
+                    
+                    if !urlFormatada.hasPrefix("http://") && !urlFormatada.hasPrefix("https://") {
+                        urlFormatada = String(format: "http://%@", urlFormatada)
+                    }
+                
+                    guard let url = URL(string: urlFormatada) else { return }
+                    
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    
+                }
+                
                     break
                 }
             }
