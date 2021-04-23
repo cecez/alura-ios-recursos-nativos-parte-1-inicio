@@ -81,8 +81,9 @@ class AlunoViewController: UIViewController, ImagePickerFotoSelecionada {
     func mostrarMultimidia(_ opcao: MenuOpcoes)
     {
         // cria multimídia
-        let multimidia          = UIImagePickerController()
-        multimidia.delegate     = imagePicker
+        let multimidia              = UIImagePickerController()
+        multimidia.delegate         = imagePicker
+        multimidia.allowsEditing    = true
         
         // define tipo de multimídia para exibir
         if opcao == .camera && UIImagePickerController.isSourceTypeAvailable(.camera) {

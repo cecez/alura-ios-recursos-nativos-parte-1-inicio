@@ -26,7 +26,8 @@ class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     // MARK: - Métodos
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let foto = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let foto = info[UIImagePickerControllerEditedImage] as! UIImage
+
         delegate?.imagePickerFotoSelecionada(foto)
         picker.dismiss(animated: true, completion: nil)
     }
